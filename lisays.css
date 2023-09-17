@@ -1,0 +1,36 @@
+/* *{
+    box-sizing: border-box;
+    background-color:khaki;
+} */
+#input{
+    background-color:rgb(108, 245, 35);
+}
+
+.form-container {
+    background-color: #a7da29;
+    padding: 20px;
+    border: 1px solid #561fd6;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+/* Style for the result message */
+#result {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Style for the "Ingredients in the Database" section */
+.approved-container {
+    background-color:  #c8e286;
+    padding: 20px;
+    border: 1px solid #8978cb;
+    border-radius: 15px;
+    
+}
+input[type="submit"] {
+    cursor: pointer;/*uzerine geldiginde maus goruntusu degisicek*/
+    background-color: #d76711;
+    font-size: 18px;
+    border-radius: 10px;
+}
