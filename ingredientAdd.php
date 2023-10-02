@@ -1,5 +1,5 @@
 <?php
-
+include_once('connaction.php');
 $ingredient = "";
 $resultMessage = "";
 
@@ -9,18 +9,6 @@ if (isset($_POST['add'])) {
 
     // Check if the text field is not empty
     if (!empty($ingredient)) {
-        // Connect to the database (modify these with your own details)
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "drinkityasin";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Check the connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
 
         // Check if the ingredient already exists in the database
         $checkQuery = "SELECT * FROM Ingredients WHERE name = '$ingredient'";
@@ -38,12 +26,15 @@ if (isset($_POST['add'])) {
         } else {
             $resultMessage = "Ingredient '$ingredient' already exists.";
         }
-
-        $conn->close();
     } else {
         $resultMessage = "Ingredient name cannot be empty.";
     }
 }
+
+// Retrieve all ingredients from the database
+$ingredientsQuery = "SELECT name FROM Ingredients";
+$ingredientsResult = $conn->query($ingredientsQuery);
+
 ?>
 
 <!DOCTYPE html>
@@ -71,18 +62,6 @@ if (isset($_POST['add'])) {
     <!-- Display all ingredients from the database -->
     <h2>Ingredients :</h2>
     <?php
-    // Connect to the database again to fetch all ingredients
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check the connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Retrieve all ingredients from the database
-    $ingredientsQuery = "SELECT name FROM Ingredients";
-    $ingredientsResult = $conn->query($ingredientsQuery);
-
     if ($ingredientsResult->num_rows > 0) {
         echo "<ul>";
         while ($row = $ingredientsResult->fetch_assoc()) {
@@ -93,11 +72,8 @@ if (isset($_POST['add'])) {
         echo "No ingredients in the database.";
     }
 
-    
-
+    // Close the database connection
     $conn->close();
-
-    
     ?>
     </div>
 </body>

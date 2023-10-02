@@ -1,16 +1,16 @@
 <?php
-$servername = "localhost";
-$username = "root"; // Replace with your MySQL username
-$password = ""; // Replace with your MySQL password
+$palvelin = "localhost";
+$kayttaja = "root";  // tämä on tietokannan käyttäjä, ei tekemäsi järjestelmän
+$salasana = "";
+$tietokanta = "drinkityasin";
 
-// Create a connection
-$conn = new mysqli($servername, $username, $password);
+// luo yhteys
+$conn = new mysqli($palvelin, $kayttaja, $salasana, $tietokanta);
 
-// Check the connection
+// jos yhteyden muodostaminen ei onnistunut, keskeytä ja näytä virheilmoitus
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+   die("Yhteyden muodostaminen epäonnistui: " . $conn->connect_error);
 }
-
-echo "Connected successfully to MySQL server.";
-$conn->close();
+// aseta merkistökoodaus (muuten ääkköset sekoavat)
+$conn->set_charset("utf8");
 ?>
